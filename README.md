@@ -7,8 +7,8 @@ Deux pièces, rien d'autre à installer :
 
 Téléchargements (mis à jour à chaque version) :
 
-- PC : https://github.com/anonyme5575/moniteur-pc/releases/download/moniteur-pc/MoniteurPC.exe
-- Téléphone : https://github.com/anonyme5575/moniteur-pc/releases/download/moniteur-pc/moniteur-pc.apk
+- PC : https://github.com/scalariapp-byte/Moniteur-PC/releases/download/moniteur-pc/MoniteurPC.exe
+- Téléphone : https://github.com/scalariapp-byte/Moniteur-PC/releases/download/moniteur-pc/moniteur-pc.apk
 
 ## Installation
 
