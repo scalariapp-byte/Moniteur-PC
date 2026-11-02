@@ -7,8 +7,8 @@ Deux pièces, rien d'autre à installer :
 
 Téléchargements (mis à jour à chaque version) :
 
-- PC : https://github.com/anonyme5575/Sperm/releases/download/moniteur-pc/MoniteurPC.exe
-- Téléphone : https://github.com/anonyme5575/Sperm/releases/download/moniteur-pc/moniteur-pc.apk
+- PC : https://github.com/anonyme5575/moniteur-pc/releases/download/moniteur-pc/MoniteurPC.exe
+- Téléphone : https://github.com/anonyme5575/moniteur-pc/releases/download/moniteur-pc/moniteur-pc.apk
 
 ## Installation
 
@@ -70,7 +70,7 @@ Le RX 580 arrête ses ventilateurs au repos : 0 tr/min n'est un problème que si
 - `pc/` : l'exe Windows (C#, .NET 8, bibliothèque [LibreHardwareMonitorLib](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 0.9.6). `pc/Core/` contient la logique testée sans Windows (FPS, alertes, format JSON).
 - `web/index.html` : la page, incluse dans l'exe.
 - `android/` : l'app (Java, compilée sans Android Studio par `android/build.sh`).
-- `tests/` : `dotnet test moniteur/tests/MoniteurPC.Tests.csproj`.
+- `tests/` : `dotnet test tests/MoniteurPC.Tests.csproj`.
 
 Le workflow GitHub « Moniteur PC » lance les tests, compile l'exe sous Windows avec PresentMon et PawnIO inclus, vérifie qu'il démarre et lit des capteurs, compile l'APK, puis publie les deux dans la release `moniteur-pc`.
 

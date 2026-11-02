@@ -2,10 +2,6 @@ name: Moniteur PC
 
 on:
   push:
-    paths:
-      - "moniteur/**"
-      - "android/fetch-tools.sh"
-      - ".github/workflows/moniteur.yml"
   workflow_dispatch:
 
 permissions:
@@ -19,7 +15,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
-      - run: dotnet test moniteur/tests/MoniteurPC.Tests.csproj --logger "console;verbosity=normal"
+      - run: dotnet test tests/MoniteurPC.Tests.csproj --logger "console;verbosity=normal"
 
   exe:
     needs: tests
@@ -36,14 +32,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          New-Item -ItemType Directory -Force moniteur/pc/outils | Out-Null
+          New-Item -ItemType Directory -Force pc/outils | Out-Null
           $r = Invoke-RestMethod https://api.github.com/repos/GameTechDev/PresentMon/releases/latest -Headers @{ Authorization = "Bearer $env:GH_TOKEN" }
           $a = $r.assets | Where-Object { $_.name -match '^PresentMon-[\d.]+-x64\.exe$' } | Select-Object -First 1
           if (-not $a) { throw "PresentMon introuvable dans $($r.tag_name)" }
-          Invoke-WebRequest $a.browser_download_url -OutFile moniteur/pc/outils/PresentMon.exe
-          Invoke-WebRequest https://raw.githubusercontent.com/LibreHardwareMonitor/LibreHardwareMonitor/v0.9.6/LibreHardwareMonitor/Resources/PawnIO_setup.exe -OutFile moniteur/pc/outils/PawnIO_setup.exe
-          Get-ChildItem moniteur/pc/outils | Format-Table Name, Length
-      - run: dotnet publish moniteur/pc/MoniteurPC.csproj -c Release -o publish
+          Invoke-WebRequest $a.browser_download_url -OutFile pc/outils/PresentMon.exe
+          Invoke-WebRequest https://raw.githubusercontent.com/LibreHardwareMonitor/LibreHardwareMonitor/v0.9.6/LibreHardwareMonitor/Resources/PawnIO_setup.exe -OutFile pc/outils/PawnIO_setup.exe
+          Get-ChildItem pc/outils | Format-Table Name, Length
+      - run: dotnet publish pc/MoniteurPC.csproj -c Release -o publish
       - name: Vérifier que l'exe démarre, mesure et sert la page
         shell: pwsh
         run: |
@@ -73,7 +69,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
-      - run: moniteur/android/build.sh
+      - run: android/build.sh
       - uses: actions/upload-artifact@v4
         with:
           name: MoniteurPC-apk
@@ -94,7 +90,7 @@ jobs:
           body: |
             - **MoniteurPC.exe** : à lancer sur le PC Windows (il demande les droits administrateur).
             - **moniteur-pc.apk** : l'app Android du téléphone.
-            Mode d'emploi : moniteur/README.md
+            Mode d'emploi : README.md
           files: |
             art/MoniteurPC.exe
             art/moniteur-pc.apk

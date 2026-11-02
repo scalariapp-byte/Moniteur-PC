@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Compile l'app Android Moniteur PC sans Android Studio (JDK 17+, curl, unzip, zip).
 #
-#   moniteur/android/build.sh   -> dist/moniteur-pc.apk
+#   android/build.sh   -> dist/moniteur-pc.apk
 set -euo pipefail
 A="$(cd "$(dirname "$0")" && pwd)"
-ROOT="$(cd "$A/../.." && pwd)"
-TOOLS_DIR="$ROOT/android"
+ROOT="$(cd "$A/.." && pwd)"
+TOOLS_DIR="$A"
 T="$TOOLS_DIR/.tools"
 OUT="$A/build"
 VERSION_CODE="${VERSION_CODE:-2}"
